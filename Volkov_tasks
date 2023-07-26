@@ -258,3 +258,11 @@ data_dat = data[(data['year'].isin([1952, 1957, 1962, 1967])) & ((data['lifeExp'
 count = len(data_dat)
 
 print (count)
+
+
+'''
+Задания 2 и 3 в задании по библиотеке pandas, к сожалению, не выполнил.
+
+
+
+'''
