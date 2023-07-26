@@ -1,0 +1,260 @@
+
+# Синтаксис (3 задачи)
+
+# 1
+
+for i in range (1,100):
+	if i % 3 == 0:
+		print ('Fizz')
+	elif i % 5 == 0:
+		print ('Buzz')
+	elif i % 3 == 0 and i % 5 == 0:
+		print ('FizzBuzz')
+
+
+
+# 2) 
+
+# 1 решение
+
+x = 3
+y = 4
+c = 0
+
+c = x
+x = y
+y = c
+
+# 2 решение
+
+x = 3
+y = 4
+
+x = x + y
+y = x - y
+x = x - y
+
+# 3) 
+
+
+# a)
+
+for i in range (0, 10):
+	i = i ** 3
+	print (i)
+
+# b)
+
+a = [i ** 3 for i in range(0, 10)]
+print (a)
+
+# c)
+
+a = range(10)
+def func(x):
+    return x**3
+
+print(list(map(func, a)))
+
+# d)
+
+a = range(10)
+b = map(lambda num: num ** 3, a)
+print (list(b))
+
+# NumPy (3 задачи)
+
+
+# 1
+# a)
+
+import numpy as np
+
+u, v = np.array([1,3,5,7]), np.array([2,4,6,8])
+
+c = np.outer(u, v)
+
+print (c)
+
+# b)
+
+import numpy as np
+
+u, v = np.array([1,3,5,7]), np.array([2,4,6,8])
+
+c = [x * np.array([2,4,6,8]) for x in np.array([1,3,5,7])]
+
+print (c)
+
+# c)
+import numpy as np
+
+u, v = np.array([1,3,5,7]), np.array([2,4,6,8])
+
+c = np.reshape(u, (4,1))
+d = np.reshape(v, (4,1))
+
+for i in c:
+	for j in d:
+		e = i*j
+		print (e)
+
+
+
+# 2)
+
+# a)
+
+import numpy as np
+from matplotlib import pylab as plt
+from numpy import linspace, pi
+
+a = np.linspace (0,2*pi,100)
+
+b = a[0: -1: 10]
+
+print (b)
+
+# b)
+
+import numpy as np
+from matplotlib import pylab as plt
+from numpy import linspace, pi
+
+a = np.linspace (0,2*pi,100)
+
+b = a[::-1]
+
+print (b)
+
+# c) 
+
+import numpy as np
+from matplotlib import pylab as plt
+from numpy import linspace, pi
+
+a = np.linspace (0,2*pi,100)
+
+for i in a:
+	if np.amax(i) < 0.1:
+		print (i)
+
+
+# d) 
+import numpy as np
+from matplotlib import pylab as plt
+from numpy import linspace, pi
+
+a = np.linspace (0,2*pi,100)
+
+x = np.sin(a)
+y = np.cos(a)
+
+plt.plot(a, x, a, y)
+plt.show()
+
+
+# 3) 
+
+# a)
+import numpy as np
+from matplotlib import pylab as plt
+%matplotlib inline
+
+x = np.arange(0, 1, 0.04)
+
+# Генерация шума
+noise = np.random.normal(0, 0.05, len(x))
+
+# Исходный y с шумом
+y_with_noise = x**2 + x + 0.2 + noise
+
+# Исходный y без шума
+y_without_noise = x**2 + x + 0.2
+
+# Модель константы с шумом
+model_constant = np.poly1d(np.polyfit(x, y_with_noise, 0))
+y_constant_noise = model_constant(x)
+
+# Модель константы без шума
+model_constant = np.poly1d(np.polyfit(x, y_without_noise, 0))
+y_constant = model_constant(x)
+
+# Модель линейной зависимости с шумом
+model_linear = np.poly1d(np.polyfit(x, y_with_noise, 1))
+y_lin_noise = model_linear(x)
+
+# Модель линейной зависимости без шума
+model_linear = np.poly1d(np.polyfit(x, y_without_noise, 1))
+y_lin = model_linear(x)
+
+# Модель квадратичной зависимости с шумом
+model_quadratic = np.poly1d(np.polyfit(x, y_with_noise, 2))
+y_quad_noise = model_quadratic(x)
+
+# Модель квадратичной зависимости без шума
+model_quadratic = np.poly1d(np.polyfit(x, y_without_noise, 2))
+y_quad = model_quadratic(x)
+
+# Модель кубической зависимости с шумом
+model_cubic = np.poly1d(np.polyfit(x, y_with_noise, 3))
+y_cube_noise = model_cubic(x)
+
+# Модель кубической зависимости без шума
+model_cubic = np.poly1d(np.polyfit(x, y_without_noise, 3))
+y_cube = model_cubic(x)
+
+# Модель 5-го порядка с шумом
+model_5th_order = np.poly1d(np.polyfit(x, y_with_noise, 5))
+y_5th_order_noise = model_5th_order(x)
+
+# Модель 5-го порядка без шума
+model_5th_order = np.poly1d(np.polyfit(x, y_without_noise, 5))
+y_5th_order = model_5th_order(x)
+
+# Модель полинома порядка 50 с шумом
+model_50th_order = np.poly1d(np.polyfit(x, y_with_noise, 50))
+y_50th_order_noise = model_50th_order(x)
+
+# Модель полинома порядка 50 без шума
+model_50th_order = np.poly1d(np.polyfit(x, y_without_noise, 50))
+y_50th_order = model_50th_order(x)
+
+# Построение графика для каждой пары исходного y с шумом и без него
+plt.figure(figsize=(10, 6))
+plt.scatter(x, y_with_noise, label='y с шумом')
+plt.scatter(x, y_without_noise, label='y без шума')
+plt.plot(x, y_constant_noise, label='Модель константы с шумом')
+plt.plot(x, y_constant, label='Модель константы без шума')
+plt.plot(x, y_lin_noise, label='Модель линейной зависимости с шумом')
+plt.plot(x, y_lin, label='Модель линейной зависимости без шума')
+plt.plot(x, y_quad_noise, label='Модель квадратичной зависимости с шумом')
+plt.plot(x, y_quad, label='Модель квадратичной зависимости без шума')
+plt.plot(x, y_cube_noise, label='Модель кубической зависимости с шумом')
+plt.plot(x, y_cube, label='Модель кубической зависимостибез шума')
+plt.plot(x, y_5th_order_noise, label='Модель 5-го порядка с шумом')
+plt.plot(x, y_5th_order, label='Модель 5-го порядка без шума')
+plt.plot(x, y_50th_order_noise, label='Модель полинома порядка 50 с шумом')
+plt.plot(x, y_50th_order, label='Модель полинома порядка 50 без шума')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# b)
+'''
+Модели высокого порядка без шума лучше соответствуют исходным зависимостям без шума.
+'''
+
+
+# PANDAS
+
+# 1
+
+
+data_dat = data[(data['year'].isin([1952, 1957, 1962, 1967])) & ((data['lifeExp'] > 58) | (data['gdpPercap'] > 100000))]
+
+count = len(data_dat)
+
+print (count)
