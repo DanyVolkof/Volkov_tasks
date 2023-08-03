@@ -252,6 +252,12 @@ plt.show()
 
 # 1
 
+import pandas as pd
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+data = pd.read_csv(r'C:\Users\gt215\Desktop\data.csv')
 
 data_dat = data[(data['year'].isin([1952, 1957, 1962, 1967])) & ((data['lifeExp'] > 58) | (data['gdpPercap'] > 100000))]
 
@@ -259,10 +265,44 @@ count = len(data_dat)
 
 print (count)
 
+# 2
+import pandas as pd
 
-'''
-Задания 2 и 3 в задании по библиотеке pandas, к сожалению, не выполнил.
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+data = pd.read_csv(r'C:\Users\gt215\Desktop\data.csv')
+
+result = data.groupby(['continent', 'year']).agg({'lifeExp': 'mean', 'country': 'nunique'}).reset_index()
+
+result.columns = ['continent', 'year', 'avg_lifeExp', 'countries']
 
 
+print(result)
 
-'''
+
+# 3
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+
+data = pd.read_csv(r'C:\Users\gt215\Desktop\data.csv')
+
+
+result = data.groupby(['continent', 'year']).agg({'lifeExp': 'mean'}).reset_index()
+continents = result['continent'].unique()
+fig, ax = plt.subplots()
+
+for continent in continents:
+    subset = result[result['continent'] == continent]
+    ax.plot(subset['year'], subset['lifeExp'], label=continent)
+
+ax.set_xlabel('Year')
+ax.set_ylabel('Average Life Expectancy')
+ax.set_title('Dynamics of Average Life Expectancy by Continent')
+ax.legend()
+
+plt.show()
